@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Overview - Spark 2.1.0 Documentation</title>
+        
+          <meta name="description" content="Apache Spark 2.1.0 documentation homepage">
+        
+
+        
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+
+        <link rel="stylesheet" href="css/pygments-default.css">
+
+        
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="navbar navbar-fixed-top" id="topbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="brand"><a href="index.html">
+                      <img src="img/spark-logo-hd.png" style="height:50px;"/></a><span class="version">2.1.0</span>
+                    </div>
+                    <ul class="nav">
+                        <!--TODO(andyk): Add class="active" attribute to li some how.-->
+                        <li><a href="index.html">Overview</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programming Guides<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="quick-start.html">Quick Start</a></li>
+                                <li><a href="programming-guide.html">Spark Programming Guide</a></li>
+                                <li class="divider"></li>
+                                <li><a href="streaming-programming-guide.html">Spark Streaming</a></li>
+                                <li><a href="sql-programming-guide.html">DataFrames, Datasets and SQL</a></li>
+                                <li><a href="structured-streaming-programming-guide.html">Structured Streaming</a></li>
+                                <li><a href="ml-guide.html">MLlib (Machine Learning)</a></li>
+                                <li><a href="graphx-programming-guide.html">GraphX (Graph Processing)</a></li>
+                                <li><a href="sparkr.html">SparkR (R on Spark)</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">API Docs<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="api/scala/index.html#org.apache.spark.package">Scala</a></li>
+                                <li><a href="api/java/index.html">Java</a></li>
+                                <li><a href="api/python/index.html">Python</a></li>
+                                <li><a href="api/R/index.html">R</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Deploying<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="cluster-overview.html">Overview</a></li>
+                                <li><a href="submitting-applications.html">Submitting Applications</a></li>
+                                <li class="divider"></li>
+                                <li><a href="spark-standalone.html">Spark Standalone</a></li>
+                                <li><a href="running-on-mesos.html">Mesos</a></li>
+                                <li><a href="running-on-yarn.html">YARN</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="api.html" class="dropdown-toggle" data-toggle="dropdown">More<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="configuration.html">Configuration</a></li>
+                                <li><a href="monitoring.html">Monitoring</a></li>
+                                <li><a href="tuning.html">Tuning Guide</a></li>
+                                <li><a href="job-scheduling.html">Job Scheduling</a></li>
+                                <li><a href="security.html">Security</a></li>
+                                <li><a href="hardware-provisioning.html">Hardware Provisioning</a></li>
+                                <li class="divider"></li>
+                                <li><a href="building-spark.html">Building Spark</a></li>
+                                <li><a href="https://cwiki.apache.org/confluence/display/SPARK/Contributing+to+Spark">Contributing to Spark</a></li>
+                                <li><a href="https://cwiki.apache.org/confluence/display/SPARK/Supplemental+Spark+Projects">Supplemental Projects</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!--<p class="navbar-text pull-right"><span class="version-text">v2.1.0</span></p>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="container-wrapper">
+
+            
+                <div class="content" id="content">
+                    
+                        <h1 class="title">Spark Overview</h1>
+                    
+
+                    <p>아파치 스파크는 빠르고 범용적인 클러스터 컴퓨팅 시스템이다.
+자바, 스칼라, 파이썬 그리고 R, 그리고 일반적인 실행 그래프를 지원하는 최적화된 엔진에서 고수준 API를 제공한다. 
+또한 SQL과 구조적 데이터 처리를 위한 <a href="sql-programming-guide.html">Spark SQL</a>, 머신러닝을 위한 <a href="ml-guide.html">MLlib</a> , 그래프 처리를 위한 <a href="graphx-programming-guide.html">GraphX</a> , 그리고 <a href="streaming-programming-guide.html">Spark Streaming</a> 을 포함한 고수준의 다양한 도구 세트를 지원한다.</p>
+
+<h1 id="downloading">Downloading</h1>
+
+<p>다운로드 페이지에서 <a href="http://spark.apache.org/downloads.html">downloads page</a> 스파크를 다운로드 한다. 이 문서는 스파크 버전 2.0.0에 대한 것이다. 스파크는 HDFS와 YARN을 위한 하둡 클라이언트 라이브러리를 사용한다. 다운로드는 인기 하둡 버전들 중에 소수에 대해 사전 패키지되어 있다. 사용자는 “Hadoop free” 바이너리를 다운로드 할 수 있고 스파크의 클래스패스를 늘려서(<a href="hadoop-provided.html">by augmenting Spark&#8217;s classpath</a>) 특정 하둡 버전으로 스파크를 실행할 수 있다.</p>
+
+<p>소스로부터 스파크를 빌드하고 싶다면 <a href="building-spark.html">Building Spark</a> 페이지를 방문하라.</p>
+
+<p>스파크는 윈도우와 유닉스, 리눅스, 맥OS에서 실행된다. 
+로컬 머신에서 쉽게 실행 가능하다 &#8212; 설치된 <code>java</code> 경로를 시스템 <code>PATH</code> 또는 <code>JAVA_HOME</code> 환경 변수에 지정하기만 하면 된다.</p>
+
+<p>스파크는 자바 7+, 파이썬 2.6+/3.4+ 그리고 R 3.1+ 에서 실행된다. 스칼라 API를 위해, 스파크 2.1.0-SNAPSHOT은 스칼라 2.11을 사용한다. 호환이 되는 스칼라 버전 2.11.x 이 필요하다.</p>
+
+<h1 id="section">예제와 쉘 실행하기</h1>
+
+<p>Spark comes with several sample programs.<br />
+스파크는 몇 가지 예제 프로그램을 함께 제공한다 
+<code>examples/src/main</code> 디렉토리에 스칼라, 자바, 파이썬 그리고 R 예제들이 있다.
+자바나 스칼라 예제 프로그램을 실행하기 위해 최상위 스파크 디렉토리에 <code>bin/run-example &lt;class&gt; [params]</code>를 사용한다.
+이 면에서 애플리케이션을 실행하기 위해 일반적인 호출 <a href="submiting-applications.html"><code>spark-submit</code> script</a>
+예를들어,</p>
+
+<pre><code>./bin/run-example SparkPi 10
+</code></pre>
+
+<p>스칼라 쉘의 수정된 버전을 통해 대화형 스파크를 실행할 수 있다. 프레임워크를 배우기 위한 최고의 방법이다.</p>
+
+<pre><code>./bin/spark-shell --master local[2]
+</code></pre>
+
+<p><a href="submitting-applications.html#master-urls">master URL for a distributed cluster</a>, or <code>local</code> to run
+locally with one thread, or <code>local[N]</code> to run locally with N threads. 
+<code>--master</code>&#8217; 옵션은 <a href="submitting-applications.html#master-usrls">분산 클러스터에 대한 마스터 URL</a>, 또는 로컬에서 하나의 쓰레드로 실행하기 위한 <code>local</code> 또는 N개의 쓰레드를 로컬에서 실행하기 위한 <code>local[N]</code> 을 명시한다.
+테스트를 위해 <code>local</code>을 사용하여 시작하는 것이 좋다. 옵션의 전체 항목을 확인하기 위해 스파크 쉘에서 <code>--help</code> 옵션을 실행한다.</p>
+
+<p>스파크는 파이썬 API를 제공한다. 파이썬 인터프리터에서 대화형으로 스파크를 실행하려면 <code>bin/pyspark</code>를 사용한다:</p>
+
+<pre><code>./bin/pyspark --master local[2]
+</code></pre>
+
+<p>예제 애플리케이션은 파이선에서 제공된다. 예를들어,</p>
+
+<pre><code>./bin/spark-submit examples/src/main/python/pi.py 10
+</code></pre>
+
+<p>스파크는 1.4 이후로 실험적으로 <a href="sparkr.html">R API</a>를 제공한다. (DataFrames APIs만 포함되어 있다).
+R 인터프리터에서 대화형으로 스파크를 실행하기 위해, <code>bin/sparkR</code>을 사용한다:</p>
+
+<pre><code>./bin/sparkR --master local[2]
+</code></pre>
+
+<p>Example applications are also provided in R. For example,
+예제 애플리케이션은 R에서도 제공된다. 예를들어,</p>
+
+<pre><code>./bin/spark-submit examples/src/main/r/dataframe.R
+</code></pre>
+
+<h1 id="section-1">클러스터에서 실행하기</h1>
+
+<p>스파크 <a href="cluster-overview.html">클러스터 모드 오버뷰</a>는 클러스터에서 실행하는 주요 개념을 설명한다.
+스파크 자체로 모두 실행할 수 있고, 기존의 클러스터 관리자들을 통해 실행할 수도 있다. 배포를 위한 여러가지 옵션들을 제공한다:</p>
+
+<ul>
+  <li><a href="spark-standalone.html">스탠드얼론 배포 모드</a>: 프라이빗 클러스터에 스파크를 배포하기 위한 가장 간단한 방법</li>
+  <li><a href="running-on-mesos.html">Apache Mesos</a></li>
+  <li><a href="running-on-yarn.html">Hadoop YARN</a></li>
+</ul>
+
+<h1 id="where-to-go-from-here">Where to Go from Here</h1>
+<p># 이제 무엇을 봐야 할까</p>
+
+<p><strong>프로그래밍 가이드:</strong></p>
+
+<ul>
+  <li><a href="quick-start.html">빠른 시작</a>: 스파크 API를 빠르게 소개한다. 여기서 시작하라!</li>
+  <li>[스파크 프로그래밍 가이드(programming-guide.html): 지원하는 모든 언어로 스파크의 상세한 개요 (Scala, Java, Python, R)(Scala, Java, Python, R)</li>
+  <li>스파크에 포함된 모듈:
+    <ul>
+      <li><a href="streaming-programming-guide.html">스파크 스트리밍</a>: 실시간 데이터 스트리밍 처리</li>
+      <li><a href="sql-programming-guide.html">스파크 SQL, Datasets, 그리고 DataFrame</a>: 구조화된 데이터와 관계형 쿼리에 대한 지원</li>
+      <li><a href="ml-guide.html">MLlib</a>: 내장 머신 러닝 라이브러리</li>
+      <li><a href="graphx-programming-guide.html">GraphX</a>: 그래프 처리를 위한 스파크의 새로운 API</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>API 문서:</strong></p>
+
+<ul>
+  <li><a href="api/scala/index.html#org.apache.spark.package">Spark Scala API (Scaladoc)</a></li>
+  <li><a href="api/java/index.html">Spark Java API (Javadoc)</a></li>
+  <li><a href="api/python/index.html">Spark Python API (Sphinx)</a></li>
+  <li><a href="api/R/index.html">Spark R API (Roxygen2)</a></li>
+</ul>
+
+<p><strong>개발 가이드:</strong></p>
+
+<ul>
+  <li><a href="cluster-overview.html">Cluster Overview</a>: 클러스터에서 실행되는 개념과 컴포넌트들의 개요</li>
+  <li><a href="submitting-applications.html">Submitting Applications</a>: 애플리케이션 패키징과 배포</li>
+  <li>배포 모드:
+    <ul>
+      <li><a href="https://github.com/amplab/spark-ec2">Amazon EC2</a>: 약 5분 안에 EC2에서 클러스터를 실행할 수 있도록한다.</li>
+      <li><a href="spark-standalone.html">Standalone Deploy Mode</a>: 써드파티 클러스터 매니저를 사용하지 않고 스탠드얼론 클러스터를 실행한다.</li>
+      <li><a href="running-on-mesos.html">Mesos</a>: 프라이빗 클러스터 사용
+  <a href="http://mesos.apache.org">Apache Mesos</a></li>
+      <li><a href="running-on-yarn.html">YARN</a>: (YARN)에 스파크 배포</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>다른 문서들:</strong></p>
+
+<ul>
+  <li><a href="configuration.html">Configuration</a>: 설정 시스템을 통한 스파크 커스터마이징</li>
+  <li><a href="monitoring.html">Monitoring</a>: 애플리케이션 행위 추적</li>
+  <li><a href="tuning.html">Tuning Guide</a>: 성능과 메모리 사용 최적화를 위한 가장 좋은 방법</li>
+  <li><a href="job-scheduling.html">Job Scheduling</a>: 스파크 애플리케이션과 자원의 스케쥴링</li>
+  <li><a href="security.html">Security</a>: 스파크 보안 지원</li>
+  <li><a href="hardware-provisioning.html">Hardware Provisioning</a>: 클러스터 하드웨어에 대한 권장 사항</li>
+  <li>다른 스토리지 시스템들과 통합:
+    <ul>
+      <li><a href="storage-openstack-swift.html">OpenStack Swift</a></li>
+    </ul>
+  </li>
+  <li><a href="building-spark.html">Building Spark</a>: 메이븐으로 스파크 빌드</li>
+  <li><a href="https://cwiki.apache.org/confluence/display/SPARK/Contributing+to+Spark">Contributing to Spark</a></li>
+  <li><a href="https://cwiki.apache.org/confluence/display/SPARK/Supplemental+Spark+Projects">기업 Projects</a>: 써드파티 스파크관련 프로젝트들</li>
+</ul>
+
+<p><strong>외부 자원:</strong></p>
+
+<ul>
+  <li><a href="http://spark.apache.org">Spark Homepage</a></li>
+  <li><a href="https://cwiki.apache.org/confluence/display/SPARK">Spark Wiki</a></li>
+  <li><a href="http://spark.apache.org/community.html">Spark Community</a> 지역모임을 포함한 자원</li>
+  <li><a href="http://stackoverflow.com/questions/tagged/apache-spark">StackOverflow tag <code>apache-spark</code></a></li>
+  <li><a href="http://spark.apache.org/mailing-lists.html">Mailing Lists</a>: 스파크에 대한 질문</li>
+  <li><a href="http://ampcamp.berkeley.edu/">AMP Camps</a>: 스파크, 스파크 스트리밍, Mesos 그리고 스파크 관련된 것들에 대해 연습하고 회담을 하는 UC 버클리에서 진행하는 트래이닝 캠프 시리즈 <a href="http://ampcamp.berkeley.edu/6/">Videos</a>,
+<a href="http://ampcamp.berkeley.edu/6/">slides</a> 그리고 <a href="http://ampcamp.berkeley.edu/6/exercises/">exercises</a> 는
+무료로 온라인에서 제공한다.</li>
+  <li><a href="http://spark.apache.org/examples.html">Code Examples</a>: 스파크의 <code>examples</code> 하위 폴더에 사용가능한 예제들이 있다. (<a href="https://github.com/apache/spark/tree/master/examples/src/main/scala/org/apache/spark/examples">Scala</a>,
+ <a href="https://github.com/apache/spark/tree/master/examples/src/main/java/org/apache/spark/examples">Java</a>,
+ <a href="https://github.com/apache/spark/tree/master/examples/src/main/python">Python</a>,
+ <a href="https://github.com/apache/spark/tree/master/examples/src/main/r">R</a>)</li>
+</ul>
+
+
+                </div>
+            
+             <!-- /container -->
+        </div>
+
+        <script src="js/vendor/jquery-1.8.0.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/anchor.min.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- MathJax Section -->
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                TeX: { equationNumbers: { autoNumber: "AMS" } }
+            });
+        </script>
+        <script>
+            // Note that we load MathJax this way to work with local file (file://), HTTP and HTTPS.
+            // We could use "//cdn.mathjax...", but that won't support "file://".
+            (function(d, script) {
+                script = d.createElement('script');
+                script.type = 'text/javascript';
+                script.async = true;
+                script.onload = function(){
+                    MathJax.Hub.Config({
+                        tex2jax: {
+                            inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ],
+                            displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+                            processEscapes: true,
+                            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+                        }
+                    });
+                };
+                script.src = ('https:' == document.location.protocol ? 'https://' : 'http://') +
+                    'cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+                d.getElementsByTagName('head')[0].appendChild(script);
+            }(document));
+        </script>
+    </body>
+</html>
