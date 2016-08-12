@@ -6,10 +6,10 @@
 
 git, github 공부 추천 링크 : http://nolboo.kim/blog/2013/10/06/github-for-beginner/
 
-## https://github.com/oopchoi/spark-docs 접속해서 Fork
-## 자신의 원격 깃헙에서 로컬로 클론(체크아웃)
-## docs 경로에 있는 md 파일을 번역하고 커밋, 푸쉬
-## 풀리퀘스트
+### 1. https://github.com/oopchoi/spark-docs 접속해서 Fork
+### 2. 자신의 원격 깃헙에서 로컬로 클론(체크아웃)
+### 3. docs 경로에 있는 md 파일을 번역하고 커밋, 푸쉬
+### 4. 풀리퀘스트
 
 주의) 여러 사람이 공동으로 작업하기 때문에 같은 파일을 수정하면 충돌이 납니다. 따라서 반드시 이슈를 등록 하고 진행중인 번역 파일에 대해 작성해주셔야 합니다.
 
