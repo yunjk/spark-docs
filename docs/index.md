@@ -37,9 +37,7 @@ Spark comes with several sample programs.
     ./bin/spark-shell --master local[2]
 
 
-[master URL for a distributed cluster](submitting-applications.html#master-urls), or `local` to run
-locally with one thread, or `local[N]` to run locally with N threads. 
-`--master`' 옵션은 [분산 클러스터에 대한 마스터 URL](submitting-applications.html#master-usrls), 또는 로컬에서 하나의 쓰레드로 실행하기 위한 `local` 또는 N개의 쓰레드를 로컬에서 실행하기 위한 `local[N]` 을 명시한다.
+`--master` 옵션은 [분산 클러스터에 대한 마스터 URL](submitting-applications.html#master-usrls), 또는 로컬에서 하나의 쓰레드로 실행하기 위한 `local` 또는 N개의 쓰레드를 로컬에서 실행하기 위한 `local[N]` 을 명시한다.
 테스트를 위해 `local`을 사용하여 시작하는 것이 좋다. 옵션의 전체 항목을 확인하기 위해 스파크 쉘에서 `--help` 옵션을 실행한다.
 
 스파크는 파이썬 API를 제공한다. 파이썬 인터프리터에서 대화형으로 스파크를 실행하려면 `bin/pyspark`를 사용한다:
