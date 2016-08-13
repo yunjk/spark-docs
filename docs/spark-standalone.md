@@ -3,18 +3,25 @@ layout: global
 title: Spark Standalone Mode
 ---
 
-* This will become a table of contents (this text will be scraped).
+* 이 것은 컨텐츠의 표가 될 것이다 (이 텍스트는 폐기 될 것이다).
 {:toc}
 
 In addition to running on the Mesos or YARN cluster managers, Spark also provides a simple standalone deploy mode. You can launch a standalone cluster either manually, by starting a master and workers by hand, or use our provided [launch scripts](#cluster-launch-scripts). It is also possible to run these daemons on a single machine for testing.
 
+Mesos나 YARN 클러스터 관리자에서 실행하기 위해, 스파크는 간단한 스탠드얼론(독립형) 배포 모드를 제공한다. 마스터와 워커를 시작하거나 제공되는 [실행 스크립트](#cluster-launch-scripts)를 사용하여 스탠드얼론 클러스터를 독립적으로 실행할 수 있다. 또한, 테스트를 위해 싱글 머신에서 데몬으로 실행할 수 있다.
+
 # Installing Spark Standalone to a Cluster
+# 클러스터에 스파크 스탠드얼론 설치하기
 
 To install Spark Standalone mode, you simply place a compiled version of Spark on each node on the cluster. You can obtain pre-built versions of Spark with each release or [build it yourself](building-spark.html).
 
+스파크 스탠드얼론 모드를 실행하려면 클러스터의 각 노드에 컴파일된 스파크 버전을 위치시키면 된다. 스파크의 pre-built 버전(바이너리)을 다운로드 하거나 [자신이 직접 빌드](building-spark.html)를 할 수 있다. 
+
 # Starting a Cluster Manually
+# 수동으로 클러스터 시작하기
 
 You can start a standalone master server by executing:
+쉘을 실행하여 스탠드얼론 마스터를 시작할 수 있다:
 
     ./sbin/start-master.sh
 
@@ -22,14 +29,21 @@ Once started, the master will print out a `spark://HOST:PORT` URL for itself, wh
 or pass as the "master" argument to `SparkContext`. You can also find this URL on
 the master's web UI, which is [http://localhost:8080](http://localhost:8080) by default.
 
+마스터가 시작되면, 자신에 대한 `spark://HOST:PORT` URL을 출력할 것이다, 워커를 연결하거나 `SparkContext`에 "master" 인수를 보내거나 할 때 URL을 사용할 있다. 마스터의 웹 UI에서 이 URL을 확인 할 수 있다. 기본값은 [http://localhost:8080](http://localhost:8080) 이다.
+
 Similarly, you can start one or more workers and connect them to the master via:
+마찬가지로, 쉡 명령을 사용하여 하나 이상의 워커를 시작할 수 있고 마스터로 연결할 수 있다:
 
     ./sbin/start-slave.sh <master-spark-URL>
 
 Once you have started a worker, look at the master's web UI ([http://localhost:8080](http://localhost:8080) by default).
 You should see the new node listed there, along with its number of CPUs and memory (minus one gigabyte left for the OS).
 
+워커가 시작되면 마스터의 웹 UI[http://localhost:8080](http://localhost:8080)에서 확인할 수 있다.
+CPU, 메모리들과 함께 새로운 노드들을 확인할 수 있다. (minus one gigabyte left for OS). 
+
 Finally, the following configuration options can be passed to the master and worker:
+최종적으로, 다음 설정 옵션들을 마스터와 워커로 보낼 수 있다: 
 
 <table class="table">
   <tr><th style="width:21%">Argument</th><th>Meaning</th></tr>
@@ -69,6 +83,7 @@ Finally, the following configuration options can be passed to the master and wor
 
 
 # Cluster Launch Scripts
+# 클러스터 실행 스크립트
 
 To launch a Spark standalone cluster with the launch scripts, you should create a file called conf/slaves in your Spark directory,
 which must contain the hostnames of all the machines where you intend to start Spark workers, one per line.
@@ -76,8 +91,15 @@ If conf/slaves does not exist, the launch scripts defaults to a single machine (
 Note, the master machine accesses each of the worker machines via ssh. By default, ssh is run in parallel and requires password-less (using a private key) access to be setup.
 If you do not have a password-less setup, you can set the environment variable SPARK_SSH_FOREGROUND and serially provide a password for each worker.
 
+실행 스크립트로 스파크 스탠드얼론을 실행하기 위해, 스파크 디렉토리 하위에 conf/slaves 파일을 생성한다, 스파크 워커를 실행하려는 모든 머신에 한 줄에 하나씩 호스트 이름을 포함시켜야 한다.
+만약 conf/slaves 파일이 존재하지 않으면, 실행 스크립트는 싱글머신을 (localhost) 기본으로 실행한다, 이 것은 테스트에 유용하다.
+주의, 마스터 머신은 ssh를 통해 워커 머신들에 접근을 한다. 기본적으로 ssh는 병렬로 실행되고, 설정을 위해 비밀번호 없이(private key 사용) 접근 하도록 해야 한다.
+만약 비밀번호 없이 접근하도록 구성되어 있지 않다면, SPARK_SSH_FOREGROUND 환경변수를 설정할 수 있고 각 워커에 대한 직렬 비밀번호를 제공해야 한다. 
+
 
 Once you've set up this file, you can launch or stop your cluster with the following shell scripts, based on Hadoop's deploy scripts, and available in `SPARK_HOME/sbin`:
+
+conf/slaves 파일을 설정한 후, 다음 쉘 스크립트들을 사용해서 클러스터를 실행하거나 중지할 수 있고, 하둡의 배포 스크립트 기반, 그리고 `SPARK_HOME/sbin`에서 사용할 수 있다 :
 
 - `sbin/start-master.sh` - Starts a master instance on the machine the script is executed on.
 - `sbin/start-slaves.sh` - Starts a slave instance on each machine specified in the `conf/slaves` file.
@@ -87,9 +109,21 @@ Once you've set up this file, you can launch or stop your cluster with the follo
 - `sbin/stop-slaves.sh` - Stops all slave instances on the machines specified in the `conf/slaves` file.
 - `sbin/stop-all.sh` - Stops both the master and the slaves as described above.
 
+- `sbin/start-master.sh` - 스크립트가 실행된 머신에 마스터 인스턴스를 시작한다.
+- `sbin/start-slaves.sh` - `conf/slaves` 파일에 지정된 각 머신에 슬레이브 인스턴스를 시작한다.
+- `sbin/start-slave.sh` - 스크립트가 실행된 머신에 슬레이브 인스턴스를 시작한다.
+- `sbin/start-all.sh` - 위에 기술한 마스터와 슬레이브 인스턴스들을 시작한다.
+- `sbin/stop-master.sh` - `bin/start-master.sh` 스크립트를 통해 시작된 마스터를 중지한다.
+- `sbin/stop-slaves.sh` - `conf/slaves` 파일에 지정된 머신의 모든 스레이브를 중지한다.
+- `sbin/stop-all.sh` - 위에 기술한 마스터와 슬레이브 인스턴스들을 중지한다.
+
 Note that these scripts must be executed on the machine you want to run the Spark master on, not your local machine.
 
+이 스크립트들은 로컬 머신이 아니라 실행하려는 스파크 마스터 머신에서 실행되어야 한다.
+
 You can optionally configure the cluster further by setting environment variables in `conf/spark-env.sh`. Create this file by starting with the `conf/spark-env.sh.template`, and _copy it to all your worker machines_ for the settings to take effect. The following settings are available:
+
+`conf/spark-env.sh` 안에 환경변수를 설정하여 클러스터를 옵션으로 설정할 수 있다. `conf/spark-env.sh.template`을 사용하여 파일을 사용하여 생성하고 모든 워커 머신에 적용하기 위해 복사한다. 다음 설정들을 사용할 수 있다:  
 
 <table class="table">
   <tr><th style="width:21%">Environment Variable</th><th>Meaning</th></tr>
@@ -157,7 +191,11 @@ You can optionally configure the cluster further by setting environment variable
 
 **Note:** The launch scripts do not currently support Windows. To run a Spark cluster on Windows, start the master and workers by hand.
 
+**주의:** 실행 스크립트는 현재 윈도우에서 지원되지 않는다. 윈도우에서 스파크 클러스터를 실행하기 위해 마스터와 워커를 수동으로 시작해야 한다.
+
 SPARK_MASTER_OPTS supports the following system properties:
+
+SPARK_MASTER_OPTS는 다음의 시스템 속성들을 제공한다:
 
 <table class="table">
 <tr><th>Property Name</th><th>Default</th><th>Meaning</th></tr>
@@ -207,6 +245,8 @@ SPARK_MASTER_OPTS supports the following system properties:
 
 SPARK_WORKER_OPTS supports the following system properties:
 
+SPARK_WORKER_OPTS는 다음의 시스템 속성들을 제공한다:
+
 <table class="table">
 <tr><th>Property Name</th><th>Default</th><th>Meaning</th></tr>
 <tr>
@@ -239,14 +279,22 @@ SPARK_WORKER_OPTS supports the following system properties:
 
 # Connecting an Application to the Cluster
 
+# 애플리케이션에서 클러스터 연결
+
 To run an application on the Spark cluster, simply pass the `spark://IP:PORT` URL of the master as to the [`SparkContext`
 constructor](programming-guide.html#initializing-spark).
 
+스파크 클러스터에서 애플리케이션을 실행하기 위해 마스터의 `spark://IP:PORT` URL을 [`SparkContext` 생성자](programming-guide.html#initializing-spark)로 보낸다.
+
 To run an interactive Spark shell against the cluster, run the following command:
+
+해당 클러스터에 대화형 스파크 쉘을 실행하려면 다음의 명령을 실행한다:
 
     ./bin/spark-shell --master spark://IP:PORT
 
 You can also pass an option `--total-executor-cores <numCores>` to control the number of cores that spark-shell uses on the cluster.
+
+클러스터에서 스파크 쉘이 사용하는 코어를 제어하기 위해 `--totoal-executor-cores <numCores>` 옵션을 보낼 수 있다.
 
 # Launching Spark Applications
 
