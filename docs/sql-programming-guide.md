@@ -362,8 +362,6 @@ The `sql` function enables applications to run SQL queries programmatically and 
 
 ## Creating Datasets
 
-## Dataset 생성하기
-
 Datasets are similar to RDDs, however, instead of using Java serialization or Kryo they use
 a specialized [Encoder](api/scala/index.html#org.apache.spark.sql.Encoder) to serialize the objects
 for processing or transmitting over the network. While both encoders and standard serialization are
@@ -371,9 +369,12 @@ responsible for turning an object into bytes, encoders are code generated dynami
 that allows Spark to perform many operations like filtering, sorting and hashing without deserializing
 the bytes back into an object.
 
-데이터셋은 RDD와 비슷하지만, 자바 직렬화 또는 Kryo를 사용하는 대신 네트워크를 통해 처리하거나 전송하기 위한 객체를 직렬화하기 위해 [Encoder](api/scala/index.html#org.apache.spark.sql.Encoder)를 특화한다.
+## Dataset 생성하기
 
-<div class="codetabs">
+데이터셋은 RDD와 비슷하지만, 자바 직렬화 또는 Kryo를 사용하는 대신 네트워크를 통해 처리하거나 전송하기 위한 객체를 직렬화하기 위해 특화된 [인코더](api/scala/index.html#org.apache.spark.sql.Encoder)를 사용한다. 
+인코더와 표준 직렬화는 모두 객체를 바이트로 바꾸는 역할을 하지만, 인코더는 동적으로 생성되는 코드이고 스파크가 바이트에서 객체로 되돌리는 역직렬화 없이 필터링, 정렬 그리고 해싱과 같은 많은 연산을 수행할 수 있도록 하는 형식을 사용한다.
+
+<div class="codetabs"> 
 <div data-lang="scala"  markdown="1">
 {% include_example create_ds scala/org/apache/spark/examples/sql/SparkSQLExample.scala %}
 </div>
@@ -394,7 +395,18 @@ The second method for creating Datasets is through a programmatic interface that
 construct a schema and then apply it to an existing RDD. While this method is more verbose, it allows
 you to construct Datasets when the columns and their types are not known until runtime.
 
+## RDD끼리 상호연산하기
+
+Spark SQL은 기존 RDD를 Dataset으로 전환하는 두 가지 메소드를 지원한다. 첫번째 메소드는 객체의 특정 타입을 포함하는 RDD의 스키마를 추론하기 위해 리플렉션을 이용한다. 
+접근을 기반으로 하는 리플렉션은 더 간결한 코드로 도하고 당신이 스파크 애플리케이션을 작성하는 동한 이미 그 스키마를 알 때 잘 동작한다.
+
+Dataset을 생성하는 두번째 방법은 당신이 스키마를 구성하고 그것을 기존 RDD에 적용하게 하는 프로그래밍 인터페이스를 통한 것이다. 이 방법은 더 장황한 반면에, 
+당신이 런타임까지 컬럼과 컬럼의 타입을 알지 못하더라도 Dataset을 생성할 수 있도록 한다.
+
 ### Inferring the Schema Using Reflection
+
+### 리플렉션을 통한 스키마 추론
+
 <div class="codetabs">
 
 <div data-lang="scala"  markdown="1">
@@ -404,7 +416,12 @@ to a DataFrame. The case class
 defines the schema of the table. The names of the arguments to the case class are read using
 reflection and become the names of the columns. Case classes can also be nested or contain complex
 types such as `Seq`s or `Array`s. This RDD can be implicitly converted to a DataFrame and then be
-registered as a table. Tables can be used in subsequent SQL statements.
+registerd as a table. Tables can be used in subsequent SQL statements.
+
+Spark SQL을 위한 스칼라 인터페이스는 자동으로 케이스 클래스들을 포함하는 RDD를 DataFrame으로 환할 수 있도록 지원한다. 케이스 클래스는 
+테이블의 스키마를 정의한다. 케이스 클래스로의 인자들의 이름은 리플렉션을 이용해 읽어지고 컬럼의 이름이 된다. 케이스 클래스는 또한 중첩 클래스가 되거나 
+`Seq` 또는 `Array`와 같은 복합적인 타입을 포함할 수 있다. 이 RDD는 암시적으로 DataFrame으로 전환되어 테이블로 등록될 수 있다. 
+테이블은 후속 SQL문에서 사용될 수 있다. 
 
 {% include_example schema_inferring scala/org/apache/spark/examples/sql/SparkSQLExample.scala %}
 </div>
@@ -418,6 +435,10 @@ does not support JavaBeans that contain `Map` field(s). Nested JavaBeans and `Li
 fields are supported though. You can create a JavaBean by creating a class that implements
 Serializable and has getters and setters for all of its fields.
 
+스파크 SQL은 [JavaBeans](http://stackoverflow.com/questions/3295496/what-is-a-javabean-exactly)의 RDD가 DataFrame으로 자동 전환할 수 있도록 지원한다. 
+리플렉션을 사용하여 얻는 `BeanInfo`는 테이블의 스키마를 정의한다. 현재, 스파크 SQL은 `Map` 필드를 포함하는 JavaBean을 지원하지 않는다. 
+중첩된 JavaBean과 `List` 또는 `Array` 필드는 완전히 지원된다. 당신은 Serializable을 구현하고 모든 필드에 대해 getter와 setter를 갖고 있는 클래스를 작성하여 JavaBean을 생성할 수 있다. 
+
 {% include_example schema_inferring java/org/apache/spark/examples/sql/JavaSparkSQLExample.java %}
 </div>
 
@@ -426,6 +447,9 @@ Serializable and has getters and setters for all of its fields.
 Spark SQL can convert an RDD of Row objects to a DataFrame, inferring the datatypes. Rows are constructed by passing a list of
 key/value pairs as kwargs to the Row class. The keys of this list define the column names of the table,
 and the types are inferred by sampling the whole datase, similar to the inference that is performed on JSON files.
+
+스파크 SQL은 Row객체의 RDD를 데이터타입을 추론하는 DataFrame으로 전환할 수 있다. Row는 Row클래스로 kwargs역할의 키/밸류 페어들의 목록을 전달하여 구성된다. 
+이 목록의 키들은 테이블의 컬럼 이름을 정의하고, 타입은 전체 datase를 샘플링하여 추론되며, JSON 파일에서 수행되는 추론과 유사하다.
 
 {% include_example schema_inferring python/sql/basic.py %}
 </div>
